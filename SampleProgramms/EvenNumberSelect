@@ -1,0 +1,16 @@
+function printEvenNumbers(n) {
+    // Loop from 1 to n
+    for (let i = 1; i <= n; i++) {
+        // Check if number is even
+        if (i % 2 === 0) {
+            console.log(i);
+        }
+    }
+}
+
+// Test case: input number = 10
+printEvenNumbers(10);
+
+ for (let i = 1; i <= n; i++) → loop from 1 up to the input number n.
+  if (i % 2 === 0) → check if i is divisible by 2 (even).
+  console.log(i) → print the even number

@@ -1,0 +1,11 @@
+function reverseWords(str) 
+{
+    //let str = "Vishal Is Tester";
+    let words = str.split(" ");
+    let reversed = words.reverse();
+    return reversed.join(" ");
+}
+
+console.log(reverseWords("Vishal Is Tester"));  // Output: "Tester Is Vishal"
+
+

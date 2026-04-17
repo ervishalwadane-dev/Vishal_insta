@@ -1,0 +1,9 @@
+Repository URL:  https://github.com/ervishalwadane-dev/Vishal_insta.git
+
+Process:
+
+1. create the file 
+2. git add .
+3. git commit -m " adding file"
+4. git status
+5. git push origin master 
