@@ -1,0 +1,23 @@
+function lastNonRepeatingChar(s) {
+    const charCount = {};
+
+    // Count frequency of each character
+    for (let char of s) {
+        charCount[char] = (charCount[char] || 0) + 1;
+    }
+
+    // Traverse string from end to start
+    for (let i = s.length - 1; i >= 0; i--) {
+        if (charCount[s[i]] === 1) {
+            return s[i];
+        }
+    }
+
+    // Fallback if no non-repeating character found
+    return 'S';
+}
+
+// Test cases
+console.log(lastNonRepeatingChar("geeksforgeeks")); // Output: r
+console.log(lastNonRepeatingChar("racecar"));       // Output: e
+console.log(lastNonRepeatingChar("aabbcc"));        // Output: S

@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "../.git"
+		},
+		{
+			"path": "../hooks"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../SampleProgramms"
+		},
+		{
+			"path": "../tests"
+		},
+		{
+			"path": "../Text.txt"
+		},
+		{
+			"path": "../utils"
+		}
+	]
+}

@@ -1,0 +1,7 @@
+const arr1 = [{id:1,name:'john'},
+    {id:2,name:'jane'},
+    {id:1,name:'john'}];
+
+const unique = Array.from(new Map(arr1.map(item => [item.id, item])).values());
+
+console.log(unique);
