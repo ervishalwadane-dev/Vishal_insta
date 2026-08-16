@@ -1,0 +1,106 @@
+
+//await page.goto(baseURL);
+  // await page.getByRole('textbox', { name: /Mobile number, username or email/i }).fill(username);
+  // await page.getByLabel('Password').fill(password);
+  // await page.getByText("Log in", { exact: true }).click();
+
+//   // Wait for captcha/checkpoint page
+//   console.log('Waiting for captcha verification page...');
+
+//   try {
+//     // Check if reCAPTCHA is present
+//     const captchaIframe = page.frameLocator('iframe[src*="recaptcha"]');
+//     const recaptchaPresent = await captchaIframe.locator('body').isVisible({ timeout: 5000 }).catch(() => false);
+
+//     if (recaptchaPresent) {
+//       console.log('🔍 reCAPTCHA detected, solving...');
+
+//       const solver = new Solver(process.env.CAPTCHA_API_KEY);
+
+//       // Get page source to find sitekey
+//       const pageContent = await page.content();
+//       const sitekeyMatch = pageContent.match(/data-sitekey="([^"]+)"/);
+
+//       if (sitekeyMatch) {
+//         const sitekey = sitekeyMatch[1];
+//         console.log(`Found sitekey: ${sitekey}`);
+
+//         // Solve captcha
+//         const result = await solver.recaptcha(sitekey, baseURL);
+//         console.log('✅ Captcha solved:', result);
+
+//         // Inject solution token
+//         await page.evaluate((token) => {
+//           document.getElementById('g-recaptcha-response').innerHTML = token;
+//         }, result);
+
+//         // Trigger form submission
+//         await page.click('button[type="submit"]');
+//         await page.waitForLoadState('networkidle');
+//         console.log('✅ Form submitted, waiting for redirect...');
+//       }
+//     }
+//   } catch (error) {
+//     console.log('No reCAPTCHA detected or already passed:', error.message);
+//   }
+
+//   // Handle Instagram checkpoints (Save login info dialog, etc.)
+//   try {
+//     const saveButton = page.locator('button:has-text("Save information")');
+//     if (await saveButton.isVisible({ timeout: 3000 }).catch(() => false)) {
+//       console.log('📌 Save login info dialog detected, clicking...');
+//       await saveButton.click();
+//       await page.waitForLoadState('networkidle');
+//     }
+//   } catch (error) {
+//     console.log('No save dialog shown');
+//   }
+
+//   // Skip Two-Factor Authentication (2FA) - Click "Not Now" or similar button
+//   try {
+//     const twoFAPage = page.locator('text=/security code|verify your account|confirm your identity/i');
+//     const twoFAVisible = await twoFAPage.isVisible({ timeout: 5000 }).catch(() => false);
+
+//     if (twoFAVisible) {
+//       console.log('🔐 Two-Factor Authentication page detected, skipping...');
+
+//       // Try to skip 2FA by clicking "Not Now", "Skip", or similar buttons
+//       const skipButtons = [
+//         page.locator('button:has-text(/Not now|Skip|Later|Cancel|Dismiss/i)').first(),
+//         page.locator('text=/Not now/i').locator('..').first(),
+//         page.locator('button[type="button"]:nth-child(2)').first(), // Often the skip button is 2nd
+//       ];
+
+//       let skipped = false;
+//       for (const button of skipButtons) {
+//         try {
+//           if (await button.isVisible({ timeout: 2000 }).catch(() => false)) {
+//             console.log('⏭️ Clicking skip button to bypass 2FA...');
+//             await button.click();
+//             await page.waitForLoadState('networkidle');
+//             skipped = true;
+//             break;
+//           }
+//         } catch (error) {
+//           continue;
+//         }
+//       }
+
+//       if (!skipped) {
+//         console.log('⚠️ Could not find skip button, continuing...');
+//       }
+//     }
+//   } catch (error) {
+//     console.log('No 2FA page detected or error:', error.message);
+//   }
+
+//   // Wait for redirect to feed after login
+//   await page.waitForURL('**/feed/**', { timeout: 60000 }).catch(() => {
+//     console.log('⚠️ Feed URL not detected, checking current URL...');
+//   });
+
+//   await page.waitForLoadState('networkidle');
+//   await context.storageState({ path: 'storageState.json' });
+//   console.log(`✅ Login successful for ${currentEnv}, storage state saved`);
+//   await browser.close();
+// }

@@ -1,25 +1,20 @@
-const {config} = require('@playwright/test');
-
-
 const environments = {
   QA: {
     baseURL: 'https://www.instagram.com/',
-    username: 'sushsingh2026',
-    password: 'Vishal123'
+    username: process.env.INSTA_USERNAME || 'sushsingh2026',
+    password: process.env.INSTA_PASSWORD || 'Vish@7776'
   },
-  // UAT: {
-  //   baseURL: 'https://uat.example.com',
-  //   // username: 'uatUser',
-  //   // password: 'uatPass123'
-  // },
-  // PROD: {
-  //   baseURL: 'https://prod.example.com',
-  //   // username: 'prodUser',
-  //   // password: 'prodPass123'
-  // }
+  UAT: {
+    baseURL: 'https://www.instagram.com/',
+    username: process.env.INSTA_USERNAME || 'sushsingh2026',
+    password: process.env.INSTA_PASSWORD || 'Vish@7776'
+  }
 };
 
-// Pick environment dynamically from process.env.ENV
-//const currentEnv = process.env.ENV || 'QA'; // default to QA
+// NEW USER: sushsingh2026 (Vish@7776)
 
-module.exports = {environments};
+const currentEnv = ['QA', 'UAT'].includes(process.env.ENV?.toUpperCase())
+  ? process.env.ENV.toUpperCase()
+  : 'QA';
+
+module.exports = { environments, currentEnv };

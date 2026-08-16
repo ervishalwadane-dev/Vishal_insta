@@ -1,5 +1,10 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
+import path from 'path';
+
+// Get absolute path to storageState
+const __dirname = path.resolve();
+const storageStatePath = path.join(__dirname, 'storageState.json');
 
 /**
  * Read environment variables from file.
@@ -13,14 +18,19 @@ import { defineConfig, devices } from '@playwright/test';
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
+  //globalSetup: './hooks/global-setup.js', // ✅ Updated path to global setup file
   //testDir: './',
-  testDir: 'tests/Suite/Smoke',
+  testDir: 'tests/Suite/InstagramTest',
+  //testDir: 'tests/Suite2/SauceDemoTest',
   /* Run tests in files in parallel */
   /*maximum time one test can run for. */
 //timeout: 10 * 1000,
 //expect: {
   //timeout: 3000
-//},
+//},{
+  
+
+   /* Run all tests in parallel. */
 /*Run test in files in parallel*/
   fullyParallel: false, // allows parallel execution of tests in different files, but tests within the same file will run sequentially. 
   // This is useful for isolating tests and preventing interference between them. If you set it to false, all tests will run sequentially, 
@@ -37,20 +47,36 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-     //baseURL: process.env.BASE_URL || 'https://www.instagram.com/',
-     headless: false,
+   // baseURL: 'https://www.instagram.com/',
+    headless: false,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     //trace: 'on-first-retry',
     trace: 'retain-on-failure',
+    //storageState: 'storageState.json'
   },
+
+
+
 
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'Instagram Tests',
+      testMatch: ['**/TestReelsFunctionality.spec.js','**/URLCheck.spec.js','**/Dropdown.spec.js','**/Insta*.spec.js', '**/Follow.spec.js', '**/Like*.spec.js', '**/CreateNew*.spec.js', '**/Reels.spec.js', '**/Comment*.spec.js', '**/Notification*.spec.js'],
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: 'instagramStorageState.json'
+      },
     },
+    // {
+    //   name: 'SauceDemo Tests',
+    //   testMatch: ['**/NewTag.spec.js', '**/Login.spec.js','**/ExecutionTime.spec.js','**/DataDrivenTest.spec.js', '**/AddToCart.spec.js', '**/AlertHandle.spec.js', '**/Dropdown.spec.js', '**/Dynamic.spec.js', '**/Frames.spec.js', '**/Scroll.spec.js', '**/URLCheck.spec.js', '**/Suite.spec.js' ],
+    //   use: {
+    //     ...devices['Desktop Chrome'],
+    //     storageState: 'storageState.json'
+    //   },
+    // },
 
     // {
     //   name: 'firefox',
@@ -86,7 +112,7 @@ export default defineConfig({
   /* Run your local dev server before starting the tests */
   // webServer: {
   //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
+   //url: 'https://www.instagram.com/',
   //   reuseExistingServer: !process.env.CI,
   // },
 });

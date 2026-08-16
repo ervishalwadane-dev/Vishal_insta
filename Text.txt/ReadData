@@ -1,5 +1,8 @@
 Repository URL:  https://github.com/ervishalwadane-dev/Vishal_insta.git
 
+
+url : https://www.saucedemo.com/ 
+
 Process:
 
 1. create the file 
@@ -7,3 +10,5 @@ Process:
 3. git commit -m " adding file"
 4. git status
 5. git push origin master 
+
+insta login after url: https://www.instagram.com/accounts/onetap/
